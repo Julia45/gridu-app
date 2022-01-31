@@ -1,0 +1,33 @@
+
+.users {
+  .mat-raised-button {
+    margin: 10px;
+    background-color: #3f51b5;
+  }
+  tr.mat-row, tr.mat-footer-row {
+    height: 75px;
+  }
+}
+
+::ng-deep.mat-paginator {
+  background-color: #303030;
+}
+
+.demo-table {
+  width: 100%;
+  .edit-btn.mat-mini-fab {
+    background-color: green;
+    color: white;
+  }
+  .mat-mini-fab {
+    margin: 5px;
+  }
+}
+
+
+
+
+
+
+
+
