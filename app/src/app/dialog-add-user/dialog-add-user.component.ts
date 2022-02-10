@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -16,7 +15,7 @@ export class DialogAddUserComponent implements OnInit {
     updated: [new Date().toISOString()]
   });
 
-  constructor(private fb: FormBuilder, private http: HttpClient,
+  constructor(private fb: FormBuilder, 
     public dialogRef: MatDialogRef<DialogAddUserComponent>,
   ) { }
 

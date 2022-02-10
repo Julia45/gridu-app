@@ -1,14 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnDestroy, OnInit,ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from "../dialog-add-user/dialog-add-user.component"
 import  {UserServiceService } from '../user-service.service'
-import { Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
-import {DialogDeleteUserComponent} from "../dialog-delete-user/dialog-delete-user.component"
-import {DialogEditUserComponent} from "../dialog-edit-user/dialog-edit-user.component"
-import { takeUntil, tap, map } from "rxjs/operators";
+import { DialogDeleteUserComponent } from "../dialog-delete-user/dialog-delete-user.component"
+import { DialogEditUserComponent } from "../dialog-edit-user/dialog-edit-user.component"
+import { takeUntil, map } from "rxjs/operators";
 import { Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-users',
@@ -17,11 +17,15 @@ import { Router } from '@angular/router';
 })
 
 export class UsersComponent implements OnInit, OnDestroy {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   unsubscribe = new Subject();
-  length: string
+  length: string;
+  page: any = 0;
+  previousPageIndex: number;
+  pageSize: any = 10;
   usersList: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   subscription: Subscription;
-  displayedColumns: string[] = ['id', 'email', 'first_name', 'last_name', 'action', 'isParticipator', "updated"];
+  displayedColumns: string[] = ['email', 'first_name', 'last_name', 'action', 'isParticipator', "updated"];
 
   constructor(
     public dialog: MatDialog, 
@@ -30,35 +34,44 @@ export class UsersComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit(): void {
-    this.getAllUsers();
+    this.getAllUsers(this.page + 1, this.pageSize);
   }
 
-  getAllUsers(): any {
-    this.userSvc.getUsers()
+  paginationChange(page: any) {
+      this.pageSize = page.pageSize;
+      this.page = page.pageIndex;
+      this.getAllUsers(this.page + 1, this.pageSize)
+    }
+    
+  getAllUsers(page, pageSize): any {
+    this.userSvc.getUsers(page, pageSize)
     .pipe(
-      tap(val => console.log(val)),
-      map((val) => {
-        return val.map(element => {
+      map((val: any) => {
+
+        console.log(val.users)
+        return {
+          ...val,
+          users: val.users.map(element => {
           return {...element, updated: new Date(element.updated)};
-        });
+        })
+      }
       } ),
       takeUntil(this.unsubscribe)
       )
     .subscribe((res) => {
-      this.usersList.data = res;
-      this.length = (res.length).toString()
+      this.usersList.data = res.users;
+      this.length = res.total
     })
   }
 
   openEditUserDialog (user) {
     const dialogRef = this.dialog.open(DialogEditUserComponent, {
-      width: '250px',
       data: {user: user},
     });
     dialogRef.afterClosed().pipe(takeUntil(this.unsubscribe)).subscribe(result => {
       if (result) {
         this.userSvc.updateUser(user.id, result.value).pipe(takeUntil(this.unsubscribe)).subscribe(() => {
-          this.getAllUsers()
+          this.getAllUsers(this.page + 1, this.pageSize)
         })
       }
     });
@@ -69,7 +82,8 @@ export class UsersComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().pipe(takeUntil(this.unsubscribe)).subscribe(result => {
       if (result) {
         this.userSvc.deleteUser(user.id).pipe(takeUntil(this.unsubscribe)).subscribe(() => {
-          this.getAllUsers()
+          this.page = 0;
+          this.getAllUsers(this.page + 1, this.pageSize)
       })
       }
     });
@@ -80,7 +94,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().pipe(takeUntil(this.unsubscribe)).subscribe(result => {
       if(result) {
         this.userSvc.addUser(result.value).pipe(takeUntil(this.unsubscribe)).subscribe(() => {
-          this.getAllUsers()
+          this.getAllUsers(this.page  + 1, this.pageSize)
         })
       }
     });

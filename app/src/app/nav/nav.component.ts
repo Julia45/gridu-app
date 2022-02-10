@@ -23,6 +23,13 @@ export class NavComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
+     this.isLogin = true;
+     
+     let user = localStorage.getItem("currentUser");
+     if (user) {
+      this.isLogin = true
+     } 
+
     this.auth.userChnaged.subscribe((user: any) => {
       if (user) {
         this.isLogin = true

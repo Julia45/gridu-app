@@ -17,8 +17,15 @@ constructor(private http: HttpClient) { }
 
   protected baseURl = "http://localhost:8000"
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseURl}/users`);
+  getUsers(page: any, limit: any): any {
+     return new Observable((observer) => {
+      this.http.get<any>(`${this.baseURl}/users?_page=${page}&_limit=${limit}`, { observe: 'response' }).subscribe((resp) => {
+        observer.next({
+          total: resp.headers.get("x-total-count"),
+          users: resp.body
+        })
+      })
+     })
   }
 
   deleteUser = (id: number): Observable<User> =>  {

@@ -6,7 +6,7 @@
       "first_name": "Michael",
       "last_name": "Lawson",
       "avatar": "https://reqres.in/img/faces/7-image.jpg",
-      "created": "2021-12-23T18:25:43.511Z"
+      "updated": "2021-12-23T18:25:43.511Z"
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "first_name": "Lindsay",
       "last_name": "Ferguson",
       "avatar": "https://reqres.in/img/faces/8-image.jpg",
-      "created": "2021-12-24T18:25:43.511Z"
+      "updated": "2021-12-24T18:25:43.511Z"
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
       "first_name": "Tobias",
       "last_name": "Funke",
       "avatar": "https://reqres.in/img/faces/9-image.jpg",
-      "created": "2021-12-25T18:25:43.511Z"
+      "updated": "2021-12-25T18:25:43.511Z"
     },
     {
       "id": 4,
@@ -30,7 +30,7 @@
       "first_name": "Byron",
       "last_name": "Fields",
       "avatar": "https://reqres.in/img/faces/10-image.jpg",
-      "created": "2021-12-26T18:25:43.511Z"
+      "updated": "2021-12-26T18:25:43.511Z"
     },
     {
       "id": 5,
@@ -38,7 +38,7 @@
       "first_name": "George",
       "last_name": "Edwards",
       "avatar": "https://reqres.in/img/faces/11-image.jpg",
-      "created": "2021-12-27T18:25:43.511Z"
+      "updated": "2021-12-27T18:25:43.511Z"
     },
     {
       "id": 6,
@@ -46,7 +46,55 @@
       "first_name": "Rachel",
       "last_name": "Howell",
       "avatar": "https://reqres.in/img/faces/12-image.jpg",
-      "created": "2021-12-28T18:25:43.511Z"
+      "updated": "2021-12-28T18:25:43.511Z"
+    },
+    {
+      "id": 7,
+      "email": "rachel.howell@reqres.in",
+      "first_name": "Rachel",
+      "last_name": "Howell",
+      "avatar": "https://reqres.in/img/faces/12-image.jpg",
+      "updated": "2021-12-28T18:25:43.511Z"
+    },
+    {
+      "id": 8,
+      "email": "rachel.howell@reqres.in",
+      "first_name": "Rachel",
+      "last_name": "Howell",
+      "avatar": "https://reqres.in/img/faces/12-image.jpg",
+      "updated": "2021-12-28T18:25:43.511Z"
+    },
+    {
+      "id": 9,
+      "email": "rachel.howell@reqres.in",
+      "first_name": "Rachel",
+      "last_name": "Howell",
+      "avatar": "https://reqres.in/img/faces/12-image.jpg",
+      "updated": "2021-12-28T18:25:43.511Z"
+    },
+    {
+      "id": 11,
+      "email": "rachel.howell@reqres.in",
+      "first_name": "Rachel",
+      "last_name": "Howell",
+      "avatar": "https://reqres.in/img/faces/12-image.jpg",
+      "updated": "2021-12-28T18:25:43.511Z"
+    },
+    {
+      "id": 12,
+      "email": "rachel.howell@reqres.in",
+      "first_name": "Rachel",
+      "last_name": "Howell",
+      "avatar": "https://reqres.in/img/faces/12-image.jpg",
+      "updated": "2021-12-28T18:25:43.511Z"
+    },
+    {
+      "id": 13,
+      "email": "rachel.howell@reqres.in",
+      "first_name": "Rachel",
+      "last_name": "Howell",
+      "avatar": "https://reqres.in/img/faces/12-image.jpg",
+      "updated": "2021-12-28T18:25:43.511Z"
     }
   ],
   "customers": [

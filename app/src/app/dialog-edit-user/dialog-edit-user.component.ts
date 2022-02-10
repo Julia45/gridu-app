@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
@@ -12,8 +12,8 @@ export class DialogEditUserComponent implements OnInit {
   myForm: FormGroup;
 
   constructor(private fb: FormBuilder, private http: HttpClient,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<DialogEditUserComponent>,) { }
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    @Optional() public dialogRef: MatDialogRef<DialogEditUserComponent>,) { }
 
   ngOnInit(): void {
     this.myForm = this.fb.group({
