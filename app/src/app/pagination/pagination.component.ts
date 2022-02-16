@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
@@ -8,14 +8,14 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class PaginationComponent implements OnInit, OnChanges {
   @Input() length: string;
-  @Input() pageSize: any;
+  @Input() pageSize: number;
   @Input() pageIndex: number
   @Output() page = new EventEmitter<PageEvent>();
 
   constructor() { }
 
-  ngOnChanges(chnages: any) {
-    if (chnages.pageIndex) {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.pageIndex) {
       this.page.emit({
         pageIndex: this.pageIndex, 
         pageSize: this.pageSize, 

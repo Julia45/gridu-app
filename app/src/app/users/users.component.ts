@@ -10,6 +10,13 @@ import { takeUntil, map } from "rxjs/operators";
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 
+interface User {
+  email: string;
+  role: string;
+  password: string;
+  token?: string;
+}
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -20,10 +27,10 @@ export class UsersComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   unsubscribe = new Subject();
   length: string;
-  page: any = 0;
+  page: number = 0;
   previousPageIndex: number;
-  pageSize: any = 10;
-  usersList: MatTableDataSource<any> = new MatTableDataSource<any>([]);
+  pageSize: number = 10;
+  usersList: MatTableDataSource<any> = new MatTableDataSource<User>([]);
   subscription: Subscription;
   displayedColumns: string[] = ['email', 'first_name', 'last_name', 'action', 'isParticipator', "updated"];
 
@@ -37,17 +44,16 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.getAllUsers(this.page + 1, this.pageSize);
   }
 
-  paginationChange(page: any) {
+  paginationChange(page: {pageSize: number, pageIndex: number }) {
       this.pageSize = page.pageSize;
       this.page = page.pageIndex;
       this.getAllUsers(this.page + 1, this.pageSize)
     }
     
-  getAllUsers(page, pageSize): any {
+  getAllUsers(page, pageSize) {
     this.userSvc.getUsers(page, pageSize)
     .pipe(
       map((val: any) => {
-
         console.log(val.users)
         return {
           ...val,

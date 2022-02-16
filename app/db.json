@@ -1,5 +1,5 @@
 {
-  "customers": [
+  "users": [
     {
       "id": 1,
       "email": "michael.lawson@reqres.in",
@@ -97,7 +97,7 @@
       "updated": "2021-12-28T18:25:43.511Z"
     }
   ],
-  "users": [
+  "customers": [
     {
       "email": "admin@mail.com",
       "password": "1234"

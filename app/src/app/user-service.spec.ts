@@ -15,7 +15,6 @@ describe('AuthService', () => {
         "email": "rachel.howell@reqres.in",
         "first_name": "Rachel",
         "last_name": "Howell",
-        "avatar": "https://reqres.in/img/faces/12-image.jpg",
         "updated": "2021-12-28T18:25:43.511Z"
       }
   ])) };
@@ -39,7 +38,7 @@ describe('AuthService', () => {
   });
 
   it('should call getUsers', () => {
-    service.getUsers().subscribe(users => {
+    service.getUsers(1, 20).subscribe(users => {
         expect(getUsersHttp.get).toBeCalledWith('http://localhost:3000/users');
         expect(users.length).toBe(1);
       });

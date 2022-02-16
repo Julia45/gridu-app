@@ -12,7 +12,7 @@ export class DialogEditUserComponent implements OnInit {
   myForm: FormGroup;
 
   constructor(private fb: FormBuilder, private http: HttpClient,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data,
     @Optional() public dialogRef: MatDialogRef<DialogEditUserComponent>,) { }
 
   ngOnInit(): void {

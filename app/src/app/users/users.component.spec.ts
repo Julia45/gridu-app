@@ -121,14 +121,6 @@ describe('UsersComponent', () => {
       first_name: "",
       updated: new Date()
     })
-
-    // let updateUsersSpy = jest.spyOn(service, 'updateUser');
-    // expect(updateUsersSpy).toHaveBeenCalled();
-    // fixture.detectChanges();
-  
-
-    // let getUsersSpy = jest.spyOn(service, "getUsers")
-    // expect(getUsersSpy).toHaveBeenCalled()
   });
 
   it('should open deleteUser dialog when clicked on edit button', () => {
@@ -148,10 +140,6 @@ describe('UsersComponent', () => {
     component.dialog.open(DialogDeleteUserComponent)
     expect(dialogRef).toHaveBeenCalled();
     fixture.detectChanges();
-  
-    
-    // let getUsersSpy = jest.spyOn(service, "getUsers")
-    // expect(getUsersSpy).toHaveBeenCalled()
 
   });
 

@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { login, logout } from './store/user.actions';
 import { HttpClient } from '@angular/common/http';
 
-export class User {
+interface User {
   email: string;
   role: string;
   password: string;
@@ -27,13 +27,13 @@ const customers = [
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   userChnaged = new Subject<User>();
-  user$: Observable<number>
+  user$: Observable<User>;
 
-  constructor( private store: Store<any>, private http: HttpClient) {
+  constructor( private store: Store<{user: User}>) {
     this.user$ = store.select('user');
   }
 
-  login(email: string, password: string): Observable<any> {
+  login(email: string, password: string): Observable<string | User> {
     return new Observable((observer) => {
       let foundCustomer = customers.find((user) => user.email === email && user.password === password)
       if (foundCustomer) {

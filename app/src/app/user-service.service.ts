@@ -17,9 +17,9 @@ constructor(private http: HttpClient) { }
 
   protected baseURl = "http://localhost:8000"
 
-  getUsers(page: any, limit: any): any {
+  getUsers(page: number, limit: number): Observable<any> {
      return new Observable((observer) => {
-      this.http.get<any>(`${this.baseURl}/customers?_page=${page}&_limit=${limit}`, { observe: 'response' }).subscribe((resp) => {
+      this.http.get<any>(`${this.baseURl}/users?_page=${page}&_limit=${limit}`, { observe: 'response' }).subscribe((resp) => {
         observer.next({
           total: resp.headers.get("x-total-count"),
           users: resp.body
@@ -29,22 +29,22 @@ constructor(private http: HttpClient) { }
   }
 
   deleteUser = (id: number): Observable<User> =>  {
-    return this.http.delete<User>(`${this.baseURl}/customers/${id}`);
+    return this.http.delete<User>(`${this.baseURl}/users/${id}`);
   }
 
   updateUser = (id, newUser: User): Observable<User>  => {
-    return this.http.put<User>(`${this.baseURl}/customers/${id}`, newUser);
+    return this.http.put<User>(`${this.baseURl}/users/${id}`, newUser);
   }
 
   addUser = (newUser): Observable<User> => {
-    return this.http.post<User>(`${this.baseURl}/customers`, newUser);
+    return this.http.post<User>(`${this.baseURl}/users`, newUser);
   }
 
   getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.baseURl}/customers/${id}`);
+    return this.http.get<User>(`${this.baseURl}/users/${id}`);
   }
 
-  getCustomers (): Observable<any[]>  {
-    return this.http.get<any[]>(`${this.baseURl}/users`);
+  getCustomers (): Observable<User[]>  {
+    return this.http.get<any[]>(`${this.baseURl}/customers`);
   }
 }

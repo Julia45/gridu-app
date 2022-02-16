@@ -4,8 +4,9 @@ import { AuthenticationService } from '../auth.service'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from "../snackbar/snackbar.component"
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-lazy-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   myForm: FormGroup;
   isLoggedIn: boolean = true;
   user$: Observable<number>
+  unsubscribe = new Subject();
 
   constructor(
     private fb: FormBuilder, 
@@ -30,7 +32,7 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.store.select("user").subscribe((data) => {
+    this.store.select("user").pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
       if (!data.user) {
         this.isLoggedIn = false
       }
@@ -51,13 +53,12 @@ export class LoginComponent implements OnInit {
     return ""
   }
 
-
   onLogin () {
     if (this.myForm.status === "VALID") {
       console.log(this.myForm.value.password)
       this.auth.login(this.myForm.value.email, this.myForm.value.password)
-      .subscribe((resp) => {
-        console.log(resp)
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(() => {
           this.snackBar.openFromComponent(SnackbarComponent, {
             data: 'You have successfully logged in.',
             duration: 3000
@@ -74,6 +75,11 @@ export class LoginComponent implements OnInit {
           });
         })
     }
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 }
 
