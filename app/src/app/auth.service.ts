@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { login, logout } from './store/user.actions';
+import { HttpClient } from '@angular/common/http';
 
 export class User {
   email: string;
@@ -24,24 +27,27 @@ const customers = [
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   userChnaged = new Subject<User>();
+  user$: Observable<number>
 
-  constructor() {}
+  constructor( private store: Store<any>, private http: HttpClient) {
+    this.user$ = store.select('user');
+  }
 
-  login(email: string, password: string): any {
+  login(email: string, password: string): Observable<any> {
     return new Observable((observer) => {
       let foundCustomer = customers.find((user) => user.email === email && user.password === password)
       if (foundCustomer) {
         this.userChnaged.next(foundCustomer);
         observer.next(foundCustomer);
-        localStorage.setItem('currentUser', JSON.stringify(foundCustomer));
+        this.store.dispatch(login(foundCustomer));
       } else {
-        observer.error('Geolocation not available');
+        observer.error('Failed to login');
       }
     })
   }
 
   logout() {
-    localStorage.removeItem('currentUser');
+    this.store.dispatch(logout());
     this.userChnaged.next(null);
   }
 }

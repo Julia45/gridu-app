@@ -31,6 +31,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { LogoutComponent } from './logout/logout.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
+import { StoreModule } from '@ngrx/store';
+import { userReducer } from './store/user.reducer';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,7 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
     UsersComponent,
     LogoutComponent,
     SnackbarComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +70,7 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
+    StoreModule.forRoot({ user: userReducer })
   ],
   providers: [UserServiceService, AuthGuardService],
   bootstrap: [AppComponent]

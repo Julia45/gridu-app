@@ -4,6 +4,8 @@ import { AuthenticationService } from '../auth.service'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from "../snackbar/snackbar.component"
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-lazy-login',
@@ -12,19 +14,27 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   myForm: FormGroup;
-  isLoggedIn: boolean = false
+  isLoggedIn: boolean = true;
+  user$: Observable<number>
+
   constructor(
     private fb: FormBuilder, 
     private router: Router,
     private auth: AuthenticationService, 
-    public snackBar: MatSnackBar
-     ) { }
+    public snackBar: MatSnackBar,
+    private store: Store<any>
+
+     ) {
+      this.user$ = store.select('user');
+   }
+
 
   ngOnInit(): void {
-    let user = localStorage.getItem("currentUser")
-    if (user) {
-      this.isLoggedIn = true
-    }
+    this.store.select("user").subscribe((data) => {
+      if (!data.user) {
+        this.isLoggedIn = false
+      }
+    });
     
     this.myForm = this.fb.group({
       email: ["", [Validators.required, Validators.email]],
@@ -44,8 +54,10 @@ export class LoginComponent implements OnInit {
 
   onLogin () {
     if (this.myForm.status === "VALID") {
+      console.log(this.myForm.value.password)
       this.auth.login(this.myForm.value.email, this.myForm.value.password)
-      .subscribe(() => {
+      .subscribe((resp) => {
+        console.log(resp)
           this.snackBar.openFromComponent(SnackbarComponent, {
             data: 'You have successfully logged in.',
             duration: 3000
