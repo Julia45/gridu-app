@@ -73,12 +73,50 @@
       "updated": "2021-12-28T18:25:43.511Z"
     },
     {
-      "id": 11,
+      "id": 10,
       "email": "rachel.howell@reqres.in",
       "first_name": "Rachel",
       "last_name": "Howell",
       "avatar": "https://reqres.in/img/faces/12-image.jpg",
       "updated": "2021-12-28T18:25:43.511Z"
+    },
+    {
+      "id": 11,
+      "email": "lola.howell@reqres.in",
+      "first_name": "Lola",
+      "last_name": "Braun",
+      "avatar": "https://reqres.in/img/faces/12-image.jpg",
+      "updated": "2021-12-28T18:25:43.511Z"
+    },
+    {
+      "id": 12,
+      "email": "andy.howell@reqres.in",
+      "first_name": "Andy",
+      "last_name": "Smith",
+      "avatar": "https://reqres.in/img/faces/12-image.jpg",
+      "updated": "2021-12-28T18:25:43.511Z"
+    },
+    {
+      "id": 13,
+      "email": "infinity.howell@reqres.in",
+      "first_name": "Infy",
+      "last_name": "Jonsons",
+      "avatar": "https://reqres.in/img/faces/12-image.jpg",
+      "updated": "2021-12-28T18:25:43.511Z"
+    },
+    {
+      "first_name": "fgnfgnfgn",
+      "email": "gbjfg@gmail.com",
+      "last_name": "fgnfgnfg",
+      "updated": "2022-02-21T15:34:11.740Z",
+      "id": 14
+    },
+    {
+      "first_name": "gbfgbfgb",
+      "email": "fgbgbfgb@gmail.com",
+      "last_name": "fgbfgbgb",
+      "updated": "2022-02-21T16:10:45.260Z",
+      "id": 16
     }
   ],
   "customers": [
@@ -91,6 +129,38 @@
       "email": "guest@gmail.com",
       "password": "5678",
       "role": "quest"
+    }
+  ],
+  "games": [
+    {
+      "name": "Idle Zoo",
+      "description": "Idle Zoo is a free idle game. You did it. You bought a zoo. You were saying for years that you were going to buy a zoo and to be honest, nobody really believed you would but then you showed us all, you did it, you actually did it, you bought a zoo.",
+      "participators": 6,
+      "image": "/assets/idle_zoo.jpeg"
+    },
+    {
+      "name": "Super Candy Jewels",
+      "description": "Super Candy Jewels is a free puzzle game. All of the candy in the world can be yours if you have the tenacity and the temerity to tap, drag, slide and match your way to victory. Super Candy Jewels is a game that will allow you to taste the sweet taste of success.",
+      "participators": 6,
+      "image": "/assets/candy_jewels.jpeg"
+    },
+    {
+      "name": "Word Hunt",
+      "description": "Word Hunt is a free word game. Words might very well be the fundamental building blocks of language as we know it. There are all kinds of words and their meanings are a tangled web of logic and coincidence that stretch back from the end of this sentence.",
+      "participators": 6,
+      "image": "/assets/word_hunt.png"
+    },
+    {
+      "name": "Chess Mania",
+      "description": "Chess Mania is a free chess puzzle. Like many things in life including life itself, chess is both a game and a puzzle. There is nothing more satisfying than trying to find your way through the puzzles and the hardships of life than by using the lessons.",
+      "participators": 6,
+      "image": "/assets/chess_mania.jpg"
+    },
+    {
+      "name": "Field Of Fury",
+      "description": "Fields Of Fury is a free IOgame. Welcome to the deadly world of fields of fury. It is a fun first-person shooter where you can choose between three roles with one goal: survive. This is a cool war game, in fact, this just might be our favorite war game.",
+      "participators": 6,
+      "image": "/assets/fields_furry.jpg"
     }
   ]
 }

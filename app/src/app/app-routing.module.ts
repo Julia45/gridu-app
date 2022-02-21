@@ -7,10 +7,12 @@ import {
   AuthGuardService as AuthGuard 
 } from './auth-guard.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { GamesComponent } from './games/games.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/users', pathMatch: 'full'},
   { path: 'logout', component: LogoutComponent },
+  { path: 'games', component: GamesComponent, canActivate: [AuthGuard] },
   { path: 'users/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard]  },
   { path: 'login', loadChildren: () => import('./lazy-login/lazy-login.module').then(m => m.LazyLoginModule) },

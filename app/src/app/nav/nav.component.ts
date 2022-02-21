@@ -21,7 +21,6 @@ interface User {
 export class NavComponent implements OnInit {
   isLogin: boolean = false;
   user$: Observable<User>
-  showSideBar: boolean = true;
   unsubscribe = new Subject();
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -37,16 +36,7 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-     this.auth.isLoggedIn$.subscribe((token) => {
-       this.showSideBar = Boolean(token)
-     })
-     this.isLogin = true;
-     this.store.select("user").pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
-      if (data.user) {
-        this.isLogin = true
-      }
-    });
-
+     this.isLogin = Boolean(JSON.parse(localStorage.getItem("user")))
     this.auth.userChnaged.pipe(takeUntil(this.unsubscribe)).subscribe((user: User) => {
       if (user) {
         this.isLogin = true
@@ -55,8 +45,6 @@ export class NavComponent implements OnInit {
       }
      })
   }
-
-
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();

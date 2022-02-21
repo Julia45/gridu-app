@@ -35,6 +35,7 @@ import { StoreModule } from '@ngrx/store';
 import { userReducer } from './store/user.reducer';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthInterceptorProvider } from './interceptor';
+import { GamesComponent } from './games/games.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AuthInterceptorProvider } from './interceptor';
     LogoutComponent,
     SnackbarComponent,
     PageNotFoundComponent,
+    GamesComponent,
   ],
   imports: [
     BrowserModule,

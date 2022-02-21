@@ -14,7 +14,8 @@ export class LogoutComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.auth.logout()
+    this.auth.logout();
+    localStorage.removeItem("user")
     setTimeout(() => {
       this.router.navigate([`/login`]);
     }, 1000)

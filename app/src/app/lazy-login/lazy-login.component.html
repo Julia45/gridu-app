@@ -1,9 +1,6 @@
 <div *ngIf="isLoggedIn">
   <mat-card>
     <mat-card-title>You are logged in.</mat-card-title>
-    <mat-card-subtitle>
-        <div>Please navigate to <a [routerLink]="['/logout']">logout</a> page to log in.</div>
-    </mat-card-subtitle>
   </mat-card>
 </div>
 <form [formGroup]="myForm" class="form" *ngIf="!isLoggedIn">

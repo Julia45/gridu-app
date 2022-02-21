@@ -37,7 +37,6 @@ describe('PaginationComponent', () => {
     nextButton.dispatchEvent(new Event('click'));
     component.paginationChange(1);
     component.page.emit()
-    console.log(fixture.debugElement.nativeElement.innerHTML)
 
   
 

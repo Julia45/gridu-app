@@ -60,7 +60,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.userSvc.getUsers(page, pageSize)
     .pipe(
       map((val: any) => {
-        console.log(val.users)
         return {
           ...val,
           users: val.users.map(element => {

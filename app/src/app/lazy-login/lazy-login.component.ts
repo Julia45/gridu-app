@@ -36,12 +36,8 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.store.select("user").pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
-      if (!data.user) {
-        this.isLoggedIn = false
-      }
-    });
-    
+    this.isLoggedIn = Boolean(JSON.parse(localStorage.getItem("user")))
+ 
     this.myForm = this.fb.group({
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required]]
