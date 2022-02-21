@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { login, logout } from './store/user.actions';
-import { HttpClient } from '@angular/common/http';
 
 interface User {
   email: string;
@@ -28,6 +27,12 @@ const customers = [
 export class AuthenticationService {
   userChnaged = new Subject<User>();
   user$: Observable<User>;
+  private readonly TOKEN_NAME = "auth"
+  isLoggedIn$ = new BehaviorSubject<any>(true)
+
+  get token () {
+    return localStorage.getItem(this.TOKEN_NAME)
+  }
 
   constructor( private store: Store<{user: User}>) {
     this.user$ = store.select('user');
@@ -38,8 +43,13 @@ export class AuthenticationService {
       let foundCustomer = customers.find((user) => user.email === email && user.password === password)
       if (foundCustomer) {
         this.userChnaged.next(foundCustomer);
+        localStorage.setItem("user", JSON.stringify(foundCustomer))
         observer.next(foundCustomer);
+
         this.store.dispatch(login(foundCustomer));
+
+        localStorage.setItem(this.TOKEN_NAME, foundCustomer.email)
+        this.isLoggedIn$.next(this.token)
       } else {
         observer.error('Failed to login');
       }
@@ -49,5 +59,7 @@ export class AuthenticationService {
   logout() {
     this.store.dispatch(logout());
     this.userChnaged.next(null);
+    this.isLoggedIn$.next(null)
+
   }
 }

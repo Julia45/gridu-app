@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit,ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from "../dialog-add-user/dialog-add-user.component"
 import  {UserServiceService } from '../user-service.service'
-import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogDeleteUserComponent } from "../dialog-delete-user/dialog-delete-user.component"
 import { DialogEditUserComponent } from "../dialog-edit-user/dialog-edit-user.component"
@@ -30,6 +30,8 @@ export class UsersComponent implements OnInit, OnDestroy {
   page: number = 0;
   previousPageIndex: number;
   pageSize: number = 10;
+  user: any;
+  isUserAdmin: boolean;
   usersList: MatTableDataSource<any> = new MatTableDataSource<User>([]);
   subscription: Subscription;
   displayedColumns: string[] = ['email', 'first_name', 'last_name', 'action', 'isParticipator', "updated"];
@@ -37,10 +39,14 @@ export class UsersComponent implements OnInit, OnDestroy {
   constructor(
     public dialog: MatDialog, 
     private userSvc: UserServiceService,
-    private router: Router
+    private router: Router,
     ) { }
 
   ngOnInit(): void {
+    this.isUserAdmin = JSON.parse(localStorage.getItem("user")).role === "admin"
+      if (!this.isUserAdmin) {
+        this.displayedColumns = this.displayedColumns.filter(word => word !== "action");
+      }
     this.getAllUsers(this.page + 1, this.pageSize);
   }
 

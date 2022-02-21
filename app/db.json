@@ -79,32 +79,18 @@
       "last_name": "Howell",
       "avatar": "https://reqres.in/img/faces/12-image.jpg",
       "updated": "2021-12-28T18:25:43.511Z"
-    },
-    {
-      "id": 12,
-      "email": "rachel.howell@reqres.in",
-      "first_name": "Rachel",
-      "last_name": "Howell",
-      "avatar": "https://reqres.in/img/faces/12-image.jpg",
-      "updated": "2021-12-28T18:25:43.511Z"
-    },
-    {
-      "id": 13,
-      "email": "rachel.howell@reqres.in",
-      "first_name": "Rachel",
-      "last_name": "Howell",
-      "avatar": "https://reqres.in/img/faces/12-image.jpg",
-      "updated": "2021-12-28T18:25:43.511Z"
     }
   ],
   "customers": [
     {
       "email": "admin@mail.com",
-      "password": "1234"
+      "password": "1234",
+      "role": "admin"
     },
     {
       "email": "guest@gmail.com",
-      "password": "5678"
+      "password": "5678",
+      "role": "quest"
     }
   ]
 }

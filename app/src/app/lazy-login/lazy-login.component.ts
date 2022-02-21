@@ -8,6 +8,13 @@ import { Observable, Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { takeUntil } from 'rxjs/operators';
 
+interface User {
+  email: string;
+  role: string;
+  password: string;
+  token?: string;
+}
+
 @Component({
   selector: 'app-lazy-login',
   templateUrl: './lazy-login.component.html',
@@ -16,7 +23,7 @@ import { takeUntil } from 'rxjs/operators';
 export class LoginComponent implements OnInit {
   myForm: FormGroup;
   isLoggedIn: boolean = true;
-  user$: Observable<number>
+  user$: Observable<User>
   unsubscribe = new Subject();
 
   constructor(
@@ -24,10 +31,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private auth: AuthenticationService, 
     public snackBar: MatSnackBar,
-    private store: Store<any>
-
-     ) {
-      this.user$ = store.select('user');
+    private store: Store<any>) {
    }
 
 
@@ -55,7 +59,6 @@ export class LoginComponent implements OnInit {
 
   onLogin () {
     if (this.myForm.status === "VALID") {
-      console.log(this.myForm.value.password)
       this.auth.login(this.myForm.value.email, this.myForm.value.password)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(() => {
@@ -66,7 +69,7 @@ export class LoginComponent implements OnInit {
           
           setTimeout(() => {
             this.router.navigate([`users/`]);
-          }, 2000)
+          }, 1000)
        
         }, () => {
           this.snackBar.openFromComponent(SnackbarComponent, {

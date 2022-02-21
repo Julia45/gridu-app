@@ -34,6 +34,7 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './store/user.reducer';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthInterceptorProvider } from './interceptor';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     FormsModule,
     StoreModule.forRoot({ user: userReducer })
   ],
-  providers: [UserServiceService, AuthGuardService],
+  providers: [UserServiceService, AuthGuardService, AuthInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

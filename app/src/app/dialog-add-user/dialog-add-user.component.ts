@@ -24,4 +24,5 @@ export class DialogAddUserComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
 }
