@@ -9,6 +9,7 @@ import { DialogEditUserComponent } from "../dialog-edit-user/dialog-edit-user.co
 import { takeUntil, map } from "rxjs/operators";
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
+import { Store } from '@ngrx/store';
 
 interface User {
   email: string;
@@ -26,6 +27,7 @@ interface User {
 export class UsersComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   unsubscribe = new Subject();
+  darkTheme = false;
   length: string;
   page: number = 0;
   previousPageIndex: number;
@@ -40,9 +42,13 @@ export class UsersComponent implements OnInit, OnDestroy {
     public dialog: MatDialog, 
     private userSvc: UserServiceService,
     private router: Router,
+    private store: Store<any>
     ) { }
 
   ngOnInit(): void {
+    this.store.subscribe((data) => {
+      this.darkTheme = data.theme.name === "dark"
+    })
     this.isUserAdmin = JSON.parse(localStorage.getItem("user")).role === "admin"
       if (!this.isUserAdmin) {
         this.displayedColumns = this.displayedColumns.filter(word => word !== "action");

@@ -1,7 +1,6 @@
 import { createAction, props } from '@ngrx/store';
+export const changeTheme = createAction(
+  'Change',
+  props<{ name: string }>()
+);
 
-export const login = createAction(
-    '[Login Page] Login',
-    props<{ email: string; password: string, role: string }>()
-  );
-export const logout = createAction('[Counter Component] Logout');

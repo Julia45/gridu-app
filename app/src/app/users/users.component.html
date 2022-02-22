@@ -1,5 +1,5 @@
 <div class="users">
-    <button mat-raised-button (click)="openAddUserDialog()" *ngIf="isUserAdmin" >Add User</button>
+    <button mat-raised-button [ngClass]="{'dark' : darkTheme}" (click)="openAddUserDialog()" *ngIf="isUserAdmin" >Add User</button>
     <table mat-table [dataSource]="usersList" class="mat-elevation-z8 demo-table">
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

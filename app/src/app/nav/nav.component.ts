@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, shareReplay, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthenticationService } from "../auth.service"
 import { Store } from '@ngrx/store';
+import {ThemePalette} from '@angular/material/core';
+import { changeTheme } from '../store/user.actions';
 
 interface User {
   email: string;
@@ -19,8 +21,8 @@ interface User {
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
+  darkTheme = false;
   isLogin: boolean = false;
-  user$: Observable<User>
   unsubscribe = new Subject();
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -31,12 +33,15 @@ export class NavComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver, private router: Router,
     private auth: AuthenticationService,
     private store: Store<any>
-    ) {
-       this.user$ = store.select('user');
+    ) {}
+
+  toggleChanges () {
+    this.darkTheme = !this.darkTheme
+    this.store.dispatch(changeTheme({ name: this.darkTheme ? "white" : "dark" }));
   }
 
   ngOnInit(): void {
-     this.isLogin = Boolean(JSON.parse(localStorage.getItem("user")))
+    this.isLogin = Boolean(JSON.parse(localStorage.getItem("user")))
     this.auth.userChnaged.pipe(takeUntil(this.unsubscribe)).subscribe((user: User) => {
       if (user) {
         this.isLogin = true

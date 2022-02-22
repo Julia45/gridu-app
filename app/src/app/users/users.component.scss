@@ -2,7 +2,11 @@
 .users {
   .mat-raised-button {
     margin: 10px;
-    background-color: #3f51b5;
+    background-color: #8164ee;
+  }
+  .mat-raised-button.dark {
+    margin: 10px;
+    background-color: #c2185b;
   }
   tr.mat-row, tr.mat-footer-row {
     height: 75px;

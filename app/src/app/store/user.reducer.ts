@@ -1,17 +1,18 @@
 import { state } from '@angular/animations';
 import { createReducer, on } from '@ngrx/store';
-import { login, logout } from './user.actions';
+import { changeTheme } from './user.actions';
  
 export const initialState = {
-    user: null
+  name: "dark"
 };
  
 const _userReducer = createReducer(
   initialState,
-  on(login, (state, user) => {
-   return {...state, user: user}
+  on(changeTheme, (state, action) => {
+   return {
+     ...state, name: action.name
+    }
   }),
-  on(logout, (state) => ({...state, user: null})),
 );
  
 export function userReducer(state, action) {

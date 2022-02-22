@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { login, logout } from './store/user.actions';
 
 interface User {
   email: string;
@@ -34,9 +32,7 @@ export class AuthenticationService {
     return localStorage.getItem(this.TOKEN_NAME)
   }
 
-  constructor( private store: Store<{user: User}>) {
-    this.user$ = store.select('user');
-  }
+  constructor() { }
 
   login(email: string, password: string): Observable<string | User> {
     return new Observable((observer) => {
@@ -45,9 +41,6 @@ export class AuthenticationService {
         this.userChnaged.next(foundCustomer);
         localStorage.setItem("user", JSON.stringify(foundCustomer))
         observer.next(foundCustomer);
-
-        this.store.dispatch(login(foundCustomer));
-
         localStorage.setItem(this.TOKEN_NAME, foundCustomer.email)
         this.isLoggedIn$.next(this.token)
       } else {
@@ -57,9 +50,7 @@ export class AuthenticationService {
   }
 
   logout() {
-    this.store.dispatch(logout());
     this.userChnaged.next(null);
     this.isLoggedIn$.next(null)
-
   }
 }

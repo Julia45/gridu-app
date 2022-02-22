@@ -21,8 +21,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {AuthGuardService} from "./auth-guard.service"
+import { AuthGuardService} from "./auth-guard.service"
 import { MatFormFieldModule } from "@angular/material/form-field"
 import { UserServiceService } from "./user-service.service";
 import { DialogDeleteUserComponent } from './dialog-delete-user/dialog-delete-user.component';
@@ -55,6 +56,7 @@ import { GamesComponent } from './games/games.component';
   imports: [
     BrowserModule,
     MatCardModule,
+    MatSlideToggleModule,
     MatSnackBarModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -73,7 +75,7 @@ import { GamesComponent } from './games/games.component';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    StoreModule.forRoot({ user: userReducer })
+    StoreModule.forRoot({ theme: userReducer })
   ],
   providers: [UserServiceService, AuthGuardService, AuthInterceptorProvider],
   bootstrap: [AppComponent]
