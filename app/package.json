@@ -6,9 +6,9 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "json-server --watch db.json --port 8000",
+    "start app": "ng serve",
     "build": "ng build",
-    "json:server": "json-server --watch db.json --port 8000",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "test:coverage": "jest --coverage",
