@@ -3,6 +3,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { TestBed } from '@angular/core/testing';
 import { AuthGuardService } from './auth-guard.service';
 import { AuthenticationService } from './auth.service';
+import { MatCardModule } from '@angular/material/card';
+
 
 class MockRouter {
   navigate(path) { }
@@ -36,7 +38,7 @@ describe('AuthGuardService', () => {
       
       
       ],
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule, MatCardModule]
     });
     service = TestBed.inject(AuthGuardService);
     auth = TestBed.inject(AuthenticationService);
@@ -72,10 +74,10 @@ describe('AuthGuardService', () => {
       value: mock,
     });
 
-    mock.setItem("currentUser", JSON.stringify({
+    mock.setItem("user", JSON.stringify({
       "email":"admin@gmail.com","password":"1234","role":"admin"
     }))
-    window.localStorage.getItem("currentUser");
+    window.localStorage.getItem("user");
 
     expect(service.canActivate()).toBeTruthy()
   });

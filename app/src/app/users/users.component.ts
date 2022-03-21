@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   previousPageIndex: number;
   pageSize: number = 10;
   user: any;
-  isUserAdmin: boolean;
+  isUserAdmin: boolean = true;
   usersList: MatTableDataSource<any> = new MatTableDataSource<User>([]);
   subscription: Subscription;
   displayedColumns: string[] = ['email', 'first_name', 'last_name', 'action', 'isParticipator', "updated"];
@@ -45,13 +45,14 @@ export class UsersComponent implements OnInit, OnDestroy {
     private store: Store<any>
     ) { }
 
-  ngOnInit(): void {
-    this.store.subscribe((data) => {
+  ngOnInit(): void {    
+    this.store.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
       this.darkTheme = data.theme.name === "dark"
     })
-    this.isUserAdmin = JSON.parse(localStorage.getItem("user")).role === "admin"
+    let user = JSON.parse(localStorage.getItem("user"))
+    this.isUserAdmin = user?.role === "admin"
       if (!this.isUserAdmin) {
-        this.displayedColumns = this.displayedColumns.filter(word => word !== "action");
+        this.displayedColumns = this.displayedColumns.filter(column => column !== "action");
       }
     this.getAllUsers(this.page + 1, this.pageSize);
   }
@@ -71,8 +72,7 @@ export class UsersComponent implements OnInit, OnDestroy {
           users: val.users.map(element => {
           return {...element, updated: new Date(element.updated)};
         })
-      }
-      } ),
+      }}),
       takeUntil(this.unsubscribe)
       )
     .subscribe((res) => {

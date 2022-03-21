@@ -23,13 +23,5 @@ export class GamesService {
 
    searchGames (searchText): Observable<any> {
      return this.http.get(`${this.baseURl}/games?q=${searchText}`)
-    // return new Observable((observer) => {
-    //   this.http.get<any>(`${this.baseURl}/games`, { observe: 'response' }).subscribe((resp) => {
-    //     observer.next({
-    //       total: resp.headers.get("x-total-count"),
-    //       games: resp.body
-    //     })
-    //   })
-    //  })
    } 
 }

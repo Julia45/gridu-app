@@ -13,6 +13,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AuthenticationService } from '../auth.service'
 import { SnackbarComponent } from "../snackbar/snackbar.component"
 import { AuthGuardService } from '../auth-guard.service';
+import { Store, StoreModule } from '@ngrx/store';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -35,7 +36,8 @@ describe('LoginComponent', () => {
         MatFormFieldModule,
         MatSnackBarModule,
         MatInputModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        StoreModule.forRoot({}),
       ],
       providers: [ 
         MatSnackBar, 
@@ -90,7 +92,19 @@ describe('LoginComponent', () => {
     inputEmailElement.dispatchEvent(new Event('blur'))
     fixture.detectChanges();
     let emailRequiredError = compiled.getElementsByTagName("mat-error")[0];
-    expect(emailRequiredError.innerHTML).toBe("This field is required")
+    expect(emailRequiredError.innerHTML).toBe("This field is required");
+  })
+
+  it("no email errors", () => {
+    const compiled = fixture.debugElement.nativeElement;
+    const inputEmailElement = fixture.debugElement.query(By.css('.emailInput')).nativeElement;
+    inputEmailElement.value = 'john@gmail.com';
+    inputEmailElement.dispatchEvent(new Event('input'));
+    inputEmailElement.dispatchEvent(new Event('blur'))
+    fixture.detectChanges();
+    let emailError = compiled.getElementsByTagName("mat-error")[0];
+    console.log(emailError)
+    expect(emailError).not.toBeTruthy()
   })
 
   it("should submit value, but inform that thwe user does not exsist", () => {
@@ -148,23 +162,6 @@ describe('LoginComponent', () => {
     component.isLoggedIn = true;
     const messageTitle = fixture.debugElement.nativeElement.getElementsByTagName("mat-card-title")[0];
     expect(messageTitle.innerHTML).toBe("You are logged in.");
-    const messageSubTitle = fixture.debugElement.nativeElement.getElementsByTagName("mat-card-subtitle")[0];
-    expect(messageSubTitle.innerHTML).toBe(" Please navigate to <a ng-reflect-router-link=\"/logout\" href=\"/logout\">logout</a> page to log in. ");
-
-  })
-  
-
-  it("should redirect a user to logout page when clicked", () => {
-    component.isLoggedIn = true;
-    const logoutLink = fixture.debugElement.nativeElement.getElementsByTagName("a")[0];
-    let href = logoutLink.getAttribute('href');
-    expect(href).toEqual('/logout');
-
-    logoutLink.dispatchEvent(new Event('click'));
-    fixture.detectChanges();
-    let linkDes = fixture.debugElement.queryAll(By.directive(RouterLinkWithHref));   
-    let routerLinks = linkDes.map(de=>de.injector.get(RouterLinkWithHref));   
-    expect(routerLinks[0].href).toBe('/logout');
   })
 });
 

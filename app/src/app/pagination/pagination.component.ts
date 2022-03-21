@@ -16,6 +16,7 @@ export class PaginationComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.pageIndex) {
+      console.log(changes)
       this.page.emit({
         pageIndex: this.pageIndex, 
         pageSize: this.pageSize, 

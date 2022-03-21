@@ -11,6 +11,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import { Store, StoreModule } from '@ngrx/store';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -22,12 +24,13 @@ describe('AppComponent', () => {
         MatListModule, 
         MatIconModule,
         MatTableModule, 
+        MatSlideToggleModule,
         MatDialogModule,
         ReactiveFormsModule, 
         FormsModule,
         MatPaginatorModule, 
         BrowserAnimationsModule,
-
+        StoreModule.forRoot({})
       ],
       declarations: [
         AppComponent, NavComponent

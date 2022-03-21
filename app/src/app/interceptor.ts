@@ -5,7 +5,7 @@ import { catchError } from "rxjs/operators";
 import { AuthenticationService } from "./auth.service";
 
 @Injectable()
-class AuthInterceptor implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
     constructor (private authService: AuthenticationService) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
@@ -13,12 +13,6 @@ class AuthInterceptor implements HttpInterceptor {
             headers: request.headers.set("authorization", this.authService.token)
         })
         return next.handle(request)
-        .pipe(
-            catchError(() => {
-                let errorMsg = `The request failed.`;
-              return throwError(errorMsg);
-            })
-          )
     }
 }
 

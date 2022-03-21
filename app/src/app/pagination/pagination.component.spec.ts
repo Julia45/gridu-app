@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from "@angular/platform-browser";
 
 import { PaginationComponent } from './pagination.component';
+import { SimpleChange, SimpleChanges } from '@angular/core';
 
 describe('PaginationComponent', () => {
   let component: PaginationComponent;
@@ -37,9 +38,29 @@ describe('PaginationComponent', () => {
     nextButton.dispatchEvent(new Event('click'));
     component.paginationChange(1);
     component.page.emit()
+  });
 
-  
+  it('emit page change on ngOnChanges', () => {
+    let prev_value = undefined;
+    let new_value = 1;
+    let is_first_change: boolean = true;
 
+    const changesObj: SimpleChanges = {
+      pageIndex: new SimpleChange(prev_value, new_value, is_first_change),
+    };
 
+    component.pageIndex = 1;
+    component.ngOnChanges(changesObj);
+    component.page.emit({
+      pageIndex: 1, 
+      pageSize: component.pageSize, 
+      length: Number(component.length)
+    })
+
+    // component.page.emit({
+    //   pageIndex: component.pageIndex, 
+    //   pageSize: component.pageSize, 
+    //   length: Number(component.length)
+    // })
   });
 });

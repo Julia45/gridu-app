@@ -43,10 +43,4 @@ describe('AuthService', () => {
         expect(users.length).toBe(1);
       });
   });
-
-
-
-
-
-
 });

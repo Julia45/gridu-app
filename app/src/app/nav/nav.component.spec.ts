@@ -7,14 +7,20 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterTestingModule } from "@angular/router/testing";
-import { AuthenticationService, User } from '../auth.service'
+import { AuthenticationService } from '../auth.service'
 import { NavComponent } from './nav.component';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { StoreModule } from '@ngrx/store';
+import { By } from "@angular/platform-browser";
+import { Store } from '@ngrx/store';
+import { changeTheme } from '../store/user.actions';
 
 describe('NavComponent', () => {
   let component: NavComponent;
   let fixture: ComponentFixture<NavComponent>;
-  let service: AuthenticationService
+  let service: AuthenticationService;
+  let store: Store
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -25,16 +31,21 @@ describe('NavComponent', () => {
         MatButtonModule,
         MatIconModule,
         MatListModule,
+        MatSlideToggleModule,
         MatSidenavModule,
         MatToolbarModule,
         RouterTestingModule,
-      ], providers: [AuthenticationService]
+        StoreModule.forRoot({})
+      ], providers: [AuthenticationService,
+        
+      ]
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NavComponent);
     component = fixture.componentInstance;
+    store = fixture.debugElement.injector.get(Store);
     service = fixture.debugElement.injector.get(AuthenticationService);
     fixture.detectChanges();
 
@@ -45,7 +56,7 @@ describe('NavComponent', () => {
   });
 
   it('should confirm user login it he/she is loggedIn', () => {
-    localStorage.setItem('currentUser', JSON.stringify(
+    localStorage.setItem('user', JSON.stringify(
       { last_name: "first",first_name: "first anme",email: "first@gmail.com", updated: new Date()}
     ));
     component.ngOnInit()
@@ -65,5 +76,27 @@ describe('NavComponent', () => {
     expect(component.isLogin).toBe(true)
     service.userChnaged.next(null)
     expect(component.isLogin).toBe(false)
+  });
+
+  it('should check toggle theme', () => {
+    let storeMock = {
+      dispatch: jest.spyOn(store, 'dispatch')
+    };
+
+    component.ngOnInit();
+    service.userChnaged.next({
+      email: "",
+      role: "",
+      password: ""
+    })
+    fixture.detectChanges();
+    const toggle = fixture.debugElement.query(By.css('.toggle')).nativeElement;
+    toggle.dispatchEvent(new Event('click'));
+    component.toggleChanges()
+    expect(component.darkTheme).toBe(true)
+    expect(storeMock.dispatch).toHaveBeenCalledTimes(1);
+    expect(storeMock.dispatch).toHaveBeenCalledWith(changeTheme({name: "white"}));
+
+
   });
 });
