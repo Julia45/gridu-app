@@ -9,7 +9,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "jsonAuth:server" : "json-server db.json -m ./node_modules/json-server-auth --port 7000"
+    "jsonAuth:server" : "json-server db.json -m ./node_modules/json-server-auth --port 7000",
+    "heroku-postbuild": "ng build — prod"
   },
   "private": true,
   "dependencies": {
