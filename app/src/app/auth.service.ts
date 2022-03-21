@@ -43,7 +43,7 @@ export class AuthenticationService {
         observer.next(foundCustomer);
         localStorage.setItem(this.TOKEN_NAME, foundCustomer.email)
         this.isLoggedIn$.next(this.token)
-      } else {
+      } else { 
         observer.error('Failed to login');
       }
     })

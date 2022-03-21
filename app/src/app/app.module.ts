@@ -14,18 +14,20 @@ import { MatListModule } from '@angular/material/list';
 import { UsersComponent } from './users/users.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
-import { MatDialogModule } from '@angular/material/dialog'
+import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import {
+  MatPaginatorModule,
+} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { AuthGuardService} from "./auth-guard.service"
-import { MatFormFieldModule } from "@angular/material/form-field"
-import { UserServiceService } from "./user-service.service";
+import { AuthGuardService } from './auth-guard.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { UserServiceService } from './user-service.service';
 import { DialogDeleteUserComponent } from './dialog-delete-user/dialog-delete-user.component';
 import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -75,9 +77,9 @@ import { GamesComponent } from './games/games.component';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    StoreModule.forRoot({ theme: userReducer })
+    StoreModule.forRoot({ theme: userReducer }),
   ],
   providers: [UserServiceService, AuthGuardService, AuthInterceptorProvider],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

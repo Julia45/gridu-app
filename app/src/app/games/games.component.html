@@ -1,21 +1,21 @@
-      <div *ngIf="showSearch">
-        <input [ngStyle]="{'max-width': '200px'}" type="email" class="form-control m-3" id="search-text" aria-describedby="search-text" 
-          [(ngModel)]="searchText" (ngModelChange)="onChange($event)" placeholder="Enter text to search" 
-          autofocus>
-      </div>
+<div *ngIf="showSearch">
+    <input [ngStyle]="{'max-width': '200px'}" type="email" class="form-control m-3" id="search-text"
+        aria-describedby="search-text" [(ngModel)]="searchText" (ngModelChange)="onChange($event)"
+        placeholder="Enter text to search" autofocus>
+</div>
 <div class="games">
     <mat-card *ngFor="let game of games" class="games_item">
         <mat-card-title>{{game.name}}</mat-card-title>
         <mat-card-subtitle>
             <p>
-                <img src={{game.image}} width="150" height="120"  >
-                {{game.description}}.</p>
+                <img src={{game.image}} width="150" height="120">
+                {{game.description}}.
+            </p>
         </mat-card-subtitle>
         <div class="games_info">
             Participators:
             <mat-icon>person</mat-icon>
             <div>{{game.participators}}</div>
         </div>
-      </mat-card>
+    </mat-card>
 </div>
-

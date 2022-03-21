@@ -20,7 +20,11 @@ import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 const dialogRefStub = {
   afterClosed() {
-    return of({ last_name: "first1",first_name: "first anme1",email: "first@gmail.com1", updated: new Date()});
+    return of({ 
+      last_name: "first1",
+      first_name: "first anme1",
+      email: "first@gmail.com1", 
+      updated: new Date()});
   },
   open () {
     return of(true);
@@ -118,18 +122,22 @@ describe('UsersComponent', () => {
     jest.spyOn(localStorage.__proto__, "getItem").mockReturnValue(
       '{"email":"admin@gmail.com","password":"1234","role":"admin"}'
     )
+
     renderComponent()
     const compiled = fixture.debugElement.nativeElement;
     fixture.detectChanges()
     let editButton = compiled.getElementsByTagName('button')[2];
     editButton.dispatchEvent(new Event('click'));
     fixture.detectChanges();
+
     let dialogRef = jest
       .spyOn(dialog, 'open')
       .mockReturnValue({ afterClosed: () => of() } as MatDialogRef<
         typeof DialogEditUserComponent
       >);
-    component.openEditUserDialog({
+
+      fixture.detectChanges();
+     component.openEditUserDialog({
       last_name: 'first',
       first_name: 'first anme',
       email: 'first@gmail.com',

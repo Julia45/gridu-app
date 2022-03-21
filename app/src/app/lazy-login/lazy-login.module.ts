@@ -4,18 +4,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LazyLoginRoutingModule } from './lazy-login-routing.module';
 import { LoginComponent } from './lazy-login.component';
-import {  MatFormFieldModule } from "@angular/material/form-field"
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 
-
 @NgModule({
-  declarations: [
-    LoginComponent
-  ],
+  declarations: [LoginComponent],
   imports: [
     CommonModule,
     LazyLoginRoutingModule,
@@ -26,8 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatIconModule,
     MatPaginatorModule,
-    MatButtonModule
-    
-  ]
+    MatButtonModule,
+  ],
 })
-export class LazyLoginModule { }
+export class LazyLoginModule {}

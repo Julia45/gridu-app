@@ -12,5 +12,4 @@ export class DialogDeleteUserComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

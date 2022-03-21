@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
-import { Router, RouterLinkWithHref } from "@angular/router";
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { PageNotFoundComponent } from './page-not-found.component';
@@ -12,10 +12,9 @@ describe('PageNotFoundComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PageNotFoundComponent ],
-      imports: [MatCardModule, RouterTestingModule]
-    })
-    .compileComponents();
+      declarations: [PageNotFoundComponent],
+      imports: [MatCardModule, RouterTestingModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

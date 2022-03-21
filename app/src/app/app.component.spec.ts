@@ -11,30 +11,28 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Store, StoreModule } from '@ngrx/store';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule, 
-        MatSidenavModule, 
+        RouterTestingModule,
+        MatSidenavModule,
         MatToolbarModule,
-        MatListModule, 
+        MatListModule,
         MatIconModule,
-        MatTableModule, 
+        MatTableModule,
         MatSlideToggleModule,
         MatDialogModule,
-        ReactiveFormsModule, 
+        ReactiveFormsModule,
         FormsModule,
-        MatPaginatorModule, 
+        MatPaginatorModule,
         BrowserAnimationsModule,
-        StoreModule.forRoot({})
+        StoreModule.forRoot({}),
       ],
-      declarations: [
-        AppComponent, NavComponent
-      ],
+      declarations: [AppComponent, NavComponent],
     }).compileComponents();
   });
 
@@ -49,5 +47,4 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app.title).toEqual('app');
   });
-
 });

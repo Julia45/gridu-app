@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { By } from "@angular/platform-browser";
+import { By } from '@angular/platform-browser';
 
 import { PaginationComponent } from './pagination.component';
 import { SimpleChange, SimpleChanges } from '@angular/core';
@@ -13,11 +13,9 @@ describe('PaginationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PaginationComponent ],
-      imports: [MatChipsModule, MatPaginatorModule, BrowserAnimationsModule
-      ]
-    })
-    .compileComponents();
+      declarations: [PaginationComponent],
+      imports: [MatChipsModule, MatPaginatorModule, BrowserAnimationsModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -31,13 +29,15 @@ describe('PaginationComponent', () => {
   });
 
   it('should emit page change', () => {
-    component.length = "12";
-    fixture.detectChanges()
+    component.length = '12';
+    fixture.detectChanges();
 
-    const nextButton = fixture.debugElement.query(By.css('.mat-paginator-navigation-next')).nativeElement;
+    const nextButton = fixture.debugElement.query(
+      By.css('.mat-paginator-navigation-next')
+    ).nativeElement;
     nextButton.dispatchEvent(new Event('click'));
     component.paginationChange(1);
-    component.page.emit()
+    component.page.emit();
   });
 
   it('emit page change on ngOnChanges', () => {
@@ -52,15 +52,9 @@ describe('PaginationComponent', () => {
     component.pageIndex = 1;
     component.ngOnChanges(changesObj);
     component.page.emit({
-      pageIndex: 1, 
-      pageSize: component.pageSize, 
-      length: Number(component.length)
-    })
-
-    // component.page.emit({
-    //   pageIndex: component.pageIndex, 
-    //   pageSize: component.pageSize, 
-    //   length: Number(component.length)
-    // })
+      pageIndex: 1,
+      pageSize: component.pageSize,
+      length: Number(component.length),
+    });
   });
 });

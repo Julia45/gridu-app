@@ -4,20 +4,16 @@
   </mat-card>
 </div>
 <form [formGroup]="myForm" class="form" *ngIf="!isLoggedIn">
-    <h3>Login</h3>
-     <mat-form-field class="example-full-width" appearance="fill">
-       <mat-label>Email</mat-label>
-       <input class="emailInput" matInput formControlName="email" placeholder="pat@example.com">
-       <mat-error *ngIf="myForm.controls.email?.errors">{{getUserEmailErrorMessage()}}</mat-error>
-
-     </mat-form-field>
-
-     <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Password</mat-label>
-        <input class="passInput" matInput formControlName="password">
-        <mat-error *ngIf="myForm.controls.password.errors?.required">Password is required</mat-error>
-      </mat-form-field>
-
-      <button mat-raised-button (click)="onLogin()">Login</button>
- </form>
-
+  <h3>Login</h3>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input class="emailInput" matInput formControlName="email" placeholder="pat@example.com">
+    <mat-error *ngIf="myForm.controls.email?.errors">{{getUserEmailErrorMessage()}}</mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Password</mat-label>
+    <input class="passInput" matInput formControlName="password">
+    <mat-error *ngIf="myForm.controls.password.errors?.required">Password is required</mat-error>
+  </mat-form-field>
+  <button mat-raised-button (click)="onLogin()">Login</button>
+</form>
