@@ -13,7 +13,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "jsonAuth:server" : "json-server db.json -m ./node_modules/json-server-auth --port 7000",
-    "heroku-postbuild": "ng build — prod"
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
