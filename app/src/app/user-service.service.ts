@@ -15,7 +15,7 @@ interface User  {
 export class UserServiceService {
 constructor(private http: HttpClient) { }
 
-  protected baseURl = "https://my-server-grudu.herokuapp.com/"
+  protected baseURl = "https://my-server-grudu.herokuapp.com"
 
   getUsers(page: number, limit: number): Observable<any> {
      return new Observable((observer) => {
