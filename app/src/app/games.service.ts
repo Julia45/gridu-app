@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GamesService {
-  protected baseURl = "http://localhost:8000"
+  protected baseURl = "https://my-server-grudu.herokuapp.com/"
 
   constructor(private http: HttpClient) { }
 
