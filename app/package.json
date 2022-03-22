@@ -6,6 +6,7 @@
   },
   "scripts": {
     "ng": "ng",
+    "dev": "ng serve",
     "jsonServer": "json-server --watch db.json --port 8000",
     "start": "node server.js",
     "build": "ng build",
